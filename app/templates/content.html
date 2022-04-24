@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <form action="/add" method="post">
+                        <div class="form-group">
+                            <input class="form-control" type="text" name="title" placeholder="Title" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" name="description" cols="100"
+                                      placeholder="Add a Description" required></textarea>
+                        </div>
+                        <button class="btn btn-primary" type="submit">
+                            Add
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <table class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Operations</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for cuestionario in cuestionarios %}
+                <tr>
+                    <td>{{ cuestionario.id }}</td>
+                    <td><strong>{{ cuestionario.nombre }}</strong></td>
+                    <td>{{ cuestionario.descripcion }}</td>
+                    <td>
+                        <a
+                           href="/turn/{{ cuestionario.id }}">
+                            Turn Status
+                        </a>
+                        <a class="btn btn-danger"
+                           href="/delete/{{ cuestionario.id }}">
+                            Delete
+                        </a>
+                        <a class="btn btn-info"
+                           href="/update/{{ cuestionario.id }}">
+                            Edit
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+
+            </table>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
+
+
+
+
+
