@@ -1,6 +1,7 @@
 from flask import render_template, jsonify, make_response
 from app import app, db
-from app.models import Cuestionario
+from app.models import Cuestionario, cuestionario_respuesta
+import jsonpickle
 
 @app.route('/')
 @app.route('/index')
@@ -25,4 +26,9 @@ def index():
 def cuestionarios():
     cuestionarios = Cuestionario.query.all()
     print(cuestionarios)
-    return "ok"
+    return jsonpickle.encode(cuestionarios)
+
+@app.route('/respuestas', methods=['GET'])
+def respuestas():
+    respuestas = cuestionario_respuesta.query.all()
+    return jsonpickle.encode(respuestas)
