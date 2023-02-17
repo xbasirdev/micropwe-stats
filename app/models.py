@@ -11,3 +11,4 @@ class cuestionario_respuesta(db.Model):
     egresado_id = db.Column(db.Integer)
     respuesta = db.Column(db.String(255))
     fecha = db.Column(db.String(255))
+    created_at = db.Column(db.DateTime)

@@ -31,4 +31,16 @@ def cuestionarios():
 @app.route('/respuestas', methods=['GET'])
 def respuestas():
     respuestas = cuestionario_respuesta.query.all()
-    return jsonpickle.encode(respuestas)
+    respuestas_list=[]
+    respuesta_json = {}
+    for respuesta in respuestas:
+        respuesta_json = {
+            "pregunta_id":respuesta.pregunta_id,
+            "egresado_id":respuesta.egresado_id,
+            "respuesta":respuesta.respuesta,
+            "fecha":respuesta.fecha,
+            "created_at":respuesta.created_at
+        }
+        respuestas_list.append(respuesta_json)
+    response = jsonify(respuestas_list)
+    return response
